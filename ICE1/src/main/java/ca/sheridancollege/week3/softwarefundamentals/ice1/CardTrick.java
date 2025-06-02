@@ -32,8 +32,8 @@ public class CardTrick {
         }
 
         Card luckyCard = new Card();
-        luckyCard.setValue(7);
-        luckyCard.setSuit("Hearts");
+        luckyCard.setValue(9);
+        luckyCard.setSuit("Spades");
 
         boolean found = false;
         for (Card c : magicHand) {
@@ -47,7 +47,7 @@ public class CardTrick {
             System.out.println("Congratulations, you get the lucky card: " +
                     luckyCard.getSuit() + " " + luckyCard.getValue());
         } else {
-            System.out.println("Sorry, the lucky card was not found in the magic hand.");
+            System.out.println("Sorry, You must have to do it agine for get the lucky card .");
         }
 
         System.out.println("\nHere is the magic hand:");
