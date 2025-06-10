@@ -5,7 +5,9 @@
  */
 package ca.sheridancollege.week3.softwarefundamentals.ice1;
 
-import java.util.Random;
+
+import java.util.Scanner;
+
 
 /**
  * A class that fills a magic hand of 7 cards with random Card Objects
@@ -17,42 +19,71 @@ import java.util.Random;
  * 
  * @author dancye
  */
-public class CardTrick {
-    
-    public static void main(String[] args)
-    {
-        Card[] magicHand = new Card[7];
-        Random rand = new Random();
 
+public class CardTrick {
+
+    public static void main(String[] args) {
+        Card[] magicHand = new Card[7];
+
+        // Fill magic hand with random cards
         for (int i = 0; i < magicHand.length; i++) {
-            Card c = new Card();
-            c.setValue(rand.nextInt(13) + 1);
-            c.setSuit(Card.SUITS[rand.nextInt(4)]);
-            magicHand[i] = c;
+            Card card = new Card();
+            card.setValue((int)(Math.random() * 13 + 1)); // card value from 1 to 13
+            card.setSuit(Card.SUITS[(int)(Math.random() * Card.SUITS.length)]); // random suit
+            magicHand[i] = card;
         }
 
-        Card luckyCard = new Card();
-        luckyCard.setValue(9);
-        luckyCard.setSuit("Spades");
+        // Ask the user to pick a card
+        Scanner input = new Scanner(System.in);
+        System.out.println("Pick a card from the deck!");
 
+        int userValue;
+        while (true) {
+            System.out.print("Enter the card value (1 to 13): ");
+            userValue = input.nextInt();
+            if (userValue >= 1 && userValue <= 13) break;
+            System.out.println("Invalid input. Please enter a number from 1 to 13.");
+        }
+
+        input.nextLine(); // clear newline character
+
+        String userSuit;
+        while (true) {
+            System.out.print("Enter the suit (Hearts, Diamonds, Spades, Clubs): ");
+            userSuit = input.nextLine();
+            boolean validSuit = false;
+            for (String s : Card.SUITS) {
+                if (s.equalsIgnoreCase(userSuit)) {
+                    userSuit = s; // normalize case
+                    validSuit = true;
+                    break;
+                }
+            }
+            if (validSuit) break;
+            System.out.println("Invalid suit. Choose from: Hearts, Diamonds, Spades, Clubs.");
+        }
+
+        // Check if user's card is in the magic hand
         boolean found = false;
         for (Card c : magicHand) {
-            if (c.getValue() == luckyCard.getValue() && c.getSuit().equals(luckyCard.getSuit())) {
+            if (c.getValue() == userValue && c.getSuit().equalsIgnoreCase(userSuit)) {
                 found = true;
                 break;
             }
         }
 
+        // Show result
+        System.out.println();
         if (found) {
-            System.out.println("Congratulations, you get the lucky card: " +
-                    luckyCard.getSuit() + " " + luckyCard.getValue());
+            System.out.println("Congratulations! Your card is in the magic hand.");
         } else {
-            System.out.println("Sorry, You must have to do it agine for get the lucky card .");
+            System.out.println("Sorry! Your card was not found in the magic hand.");
         }
 
-        System.out.println("\nHere is the magic hand:");
+        // Display the full magic hand
+        System.out.println("\nThe Magic Hand was:");
         for (Card c : magicHand) {
-            System.out.println(c.getSuit() + " " + c.getValue());
+            System.out.println(" - " + c.getValue() + " of " + c.getSuit());
         }
     }
 }
