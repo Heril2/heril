@@ -9,22 +9,16 @@ package permitsystem;
  * @author Patel Heril
  */
 public class Permit {
-    private int id;
-    private String description;
+    private String permitNumber;
     private PermitCategory category;
 
-    public Permit(int id, String description, PermitCategory category) {
-        this.id = id;
-        this.description = description;
+    public Permit(String permitNumber, PermitCategory category) {
+        this.permitNumber = permitNumber;
         this.category = category;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return description;
+    public String getPermitNumber() {
+        return permitNumber;
     }
 
     public PermitCategory getCategory() {
@@ -32,6 +26,6 @@ public class Permit {
     }
 
     public String getInfo() {
-        return "ID: " + id + ", Description: " + description + ", Category: " + category;
+        return "Permit Number: " + permitNumber + ", Category: " + category;
     }
 }
