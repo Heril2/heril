@@ -5,8 +5,7 @@
 package studentprogram;
 
 /**
- *
- * @author Patel Heril
+ * Editided in git * @author Patel Heril
  */
 public class Student {
     private int id;
